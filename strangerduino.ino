@@ -1,11 +1,12 @@
 #include <FastLED.h>
-#define DATA_PIN 6
-#define NUM_LEDS 50
+#define DATA_PIN 7
+#define NUM_LEDS 100
 #define COLOR_ORDER RGB
 
 CRGB leds[NUM_LEDS];
 
-int word_help [] = {7, 4, 11, 15};
+int word_help [] = {25, 26, 27, 28, 29, 13, 14, 15, 50, 38, 37, 36};
+int word_run [] = {71, 72, 73, 81, 82, 44, 43, 42};
 
 void setup(){
   Serial.begin(9600);
@@ -22,8 +23,7 @@ void wordHandler(int *toDisplay, int arraySize) {
   for (int i = 0; i < arraySize; i++) {
     int position = toDisplay[i];
     leds[position] = CRGB::Red; FastLED.show();
-    delay(300);
-    leds[position] = CRGB::Black; FastLED.show();
+    delay(3000);
   }
 }
 
@@ -63,10 +63,11 @@ void christmas() {
 }
 
 void loop(){
-
-  wordHandler(word_help, 4);
+  wordHandler(word_help, 12);
   delay(3000);
   christmas();
   delay(3000);
-  
+  wordHandler(word_run, 8);
+  delay(3000);
+
 }
